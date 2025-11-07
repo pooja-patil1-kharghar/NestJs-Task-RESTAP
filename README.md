@@ -1,9 +1,9 @@
-Clean NestJS Task API
+ NestJS Task API
 =====================
 
 Features:
 - MySQL + TypeORM (database: taskdb)
-- REST + GraphQL (shared service)
+- REST
 - Swagger at /api
 - Global ValidationPipe and Global HTTP Exception Filter
 - Jest unit tests
@@ -34,22 +34,17 @@ migrations
 
    2.npm run migration:generate -- InitialMigration
        This will create a migration file in src/migrations.
+         Name your migration as you like
+         Run migrations
+           npm run migration:run
 
-        Name your migration as you like after --
-        
-        Run migrations
-
-        npm run migration:run
-
+      
 
 Applies all pending migrations to the database.
 
 Revert last migration (if needed)
 
 npm run migration:revert
-
-
-Rolls back the last applied migration.
 
 
 
