@@ -56,7 +56,7 @@ export class TaskController {
     return this.taskService.update(id, updateTaskDto);
   }
 
-  /** Delete a task */
+  /* Delete a task */
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete task by ID' })
@@ -64,4 +64,14 @@ export class TaskController {
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.taskService.remove(id);
   }
+
+//for custom query
+
+  @Get('status/:status')
+@ApiOperation({ summary: 'Get tasks filtered by status' })
+@ApiResponse({ status: 200, description: 'Tasks with the given status', type: [TaskResponseDto] })
+async findByStatus(@Param('status') status: string): Promise<TaskResponseDto[]> {
+  return this.taskService.findByStatus(status);
+}
+
 }

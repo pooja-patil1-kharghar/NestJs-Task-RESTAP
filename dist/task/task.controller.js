@@ -38,6 +38,9 @@ let TaskController = class TaskController {
     async remove(id) {
         return this.taskService.remove(id);
     }
+    async findByStatus(status) {
+        return this.taskService.findByStatus(status);
+    }
 };
 exports.TaskController = TaskController;
 __decorate([
@@ -86,6 +89,15 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TaskController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('status/:status'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get tasks filtered by status' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Tasks with the given status', type: [task_response_dto_1.TaskResponseDto] }),
+    __param(0, (0, common_1.Param)('status')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], TaskController.prototype, "findByStatus", null);
 exports.TaskController = TaskController = __decorate([
     (0, swagger_1.ApiTags)('tasks'),
     (0, common_1.Controller)('tasks'),

@@ -42,6 +42,13 @@ export class TaskService {
     await this.taskRepo.remove(id);
   }
 
+//for custom query
+  async findByStatus(status: string): Promise<TaskResponseDto[]> {
+  const tasks = await this.taskRepo.findByStatus(status);
+  return plainToInstance(TaskResponseDto, tasks, { excludeExtraneousValues: true });
+}
+
+
   /** Helper: throws NotFoundException if task does not exist */
   private async ensureTaskExists(id: number): Promise<Task> {
     const task = await this.taskRepo.findOne(id);

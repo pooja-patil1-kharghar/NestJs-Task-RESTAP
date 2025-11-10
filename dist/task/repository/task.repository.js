@@ -46,6 +46,13 @@ let TaskRepository = class TaskRepository {
             throw new common_1.NotFoundException(`Task with ID ${id} not found`);
         }
     }
+    async findByStatus(status) {
+        const statusEnum = status.toUpperCase();
+        return this.repo.find({
+            where: { status: statusEnum },
+            order: { createdAt: 'DESC' },
+        });
+    }
 };
 exports.TaskRepository = TaskRepository;
 exports.TaskRepository = TaskRepository = __decorate([

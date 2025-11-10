@@ -10,5 +10,6 @@ export declare class TaskService {
     findOne(id: number): Promise<TaskResponseDto>;
     update(id: number, dto: UpdateTaskDto): Promise<TaskResponseDto>;
     remove(id: number): Promise<void>;
+    findByStatus(status: string): Promise<TaskResponseDto[]>;
     private ensureTaskExists;
 }

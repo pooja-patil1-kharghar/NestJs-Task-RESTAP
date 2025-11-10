@@ -11,4 +11,5 @@ export declare class TaskRepository {
     findOne(id: number): Promise<Task | null>;
     update(id: number, updateDto: UpdateTaskDto): Promise<Task>;
     remove(id: number): Promise<void>;
+    findByStatus(status: string): Promise<Task[]>;
 }

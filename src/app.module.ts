@@ -17,8 +17,8 @@ import { DataSource } from 'typeorm';
       password: process.env.DB_PASSWORD || 'cdac',
       database: process.env.DB_DATABASE || 'NestJstaskdb',
       entities: [Task],
-      synchronize: false,  // ❌ Never auto-create tables
-      dropSchema: false,   // ❌ Never drop tables
+      synchronize: false,  //Never auto-create tables
+     dropSchema: false,   // Never drop tables
       logging: true,
       migrations: [__dirname + '/migrations/*{.ts,.js}'], // migration files
     }),

@@ -10,4 +10,5 @@ export declare class TaskController {
     findOne(id: number): Promise<TaskResponseDto>;
     update(id: number, updateTaskDto: UpdateTaskDto): Promise<TaskResponseDto>;
     remove(id: number): Promise<void>;
+    findByStatus(status: string): Promise<TaskResponseDto[]>;
 }

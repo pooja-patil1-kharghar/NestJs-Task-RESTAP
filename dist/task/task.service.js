@@ -40,6 +40,10 @@ let TaskService = class TaskService {
         await this.ensureTaskExists(id);
         await this.taskRepo.remove(id);
     }
+    async findByStatus(status) {
+        const tasks = await this.taskRepo.findByStatus(status);
+        return (0, class_transformer_1.plainToInstance)(task_response_dto_1.TaskResponseDto, tasks, { excludeExtraneousValues: true });
+    }
     async ensureTaskExists(id) {
         const task = await this.taskRepo.findOne(id);
         if (!task) {
