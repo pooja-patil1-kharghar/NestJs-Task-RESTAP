@@ -13,8 +13,8 @@ import { DataSource } from 'typeorm';
       type: 'mysql',
       host: process.env.DB_HOST || 'localhost',
       port: parseInt(process.env.DB_PORT || '3306', 10),
-      username: process.env.DB_USERNAME || 'root',
-      password: process.env.DB_PASSWORD || 'cdac',
+      username: process.env.DB_USERNAME || '<your username>',
+      password: process.env.DB_PASSWORD || '<your passwd>',
       database: process.env.DB_DATABASE || 'NestJstaskdb',
       entities: [Task],
       synchronize: false,  //Never auto-create tables
