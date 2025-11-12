@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskController = void 0;
 const common_1 = require("@nestjs/common");
 const task_service_1 = require("./task.service");
+const common_2 = require("@nestjs/common");
+const task_entity_1 = require("./entities/task.entity");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
 const swagger_1 = require("@nestjs/swagger");
@@ -39,7 +41,11 @@ let TaskController = class TaskController {
         return this.taskService.remove(id);
     }
     async findByStatus(status) {
-        return this.taskService.findByStatus(status);
+        const upperStatus = status.toUpperCase();
+        if (!Object.values(task_entity_1.TaskStatus).includes(upperStatus)) {
+            throw new common_2.BadRequestException(`Invalid status: ${status}`);
+        }
+        return this.taskService.findByStatus(upperStatus);
     }
 };
 exports.TaskController = TaskController;
@@ -91,8 +97,6 @@ __decorate([
 ], TaskController.prototype, "remove", null);
 __decorate([
     (0, common_1.Get)('status/:status'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get tasks filtered by status' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Tasks with the given status', type: [task_response_dto_1.TaskResponseDto] }),
     __param(0, (0, common_1.Param)('status')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

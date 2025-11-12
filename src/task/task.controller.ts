@@ -11,6 +11,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
+import { BadRequestException } from '@nestjs/common';
+import { TaskStatus } from './entities/task.entity';  // adjust path if needed
+
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -67,11 +70,18 @@ export class TaskController {
 
 //for custom query
 
-  @Get('status/:status')
-@ApiOperation({ summary: 'Get tasks filtered by status' })
-@ApiResponse({ status: 200, description: 'Tasks with the given status', type: [TaskResponseDto] })
-async findByStatus(@Param('status') status: string): Promise<TaskResponseDto[]> {
-  return this.taskService.findByStatus(status);
+ @Get('status/:status')
+async findByStatus(@Param('status') status: string) {
+  // Convert to uppercase to make it case-insensitive
+  const upperStatus = status.toUpperCase();
+
+  // ✅ Validate the status
+  if (!Object.values(TaskStatus).includes(upperStatus as TaskStatus)) {
+    throw new BadRequestException(`Invalid status: ${status}`);
+  }
+
+  return this.taskService.findByStatus(upperStatus as TaskStatus);
+}
 }
 
-}
+
